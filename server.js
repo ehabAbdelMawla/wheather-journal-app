@@ -15,9 +15,9 @@ const app = express();
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors())
-// Cors for cross origin allowance
 
+// Cors for cross origin allowance
+app.use(cors())
 // Initialize the main project folder
 app.use(express.static('website'));
 
@@ -47,12 +47,13 @@ app.post("/", (req, res, next) => {
         projectData.date = date;
         projectData.user_response = user_response;
         res.statusCode = 200;
-        res.statusMessage = "Added Success.";
+        res.send("Added Success.");
     } else {
         res.statusCode = 400;
-        res.statusMessage = "Body Does Not Match Required Data.";
+
+        res.send("Body Does Not Match Required Data.");
     }
-    res.json(projectData);
+
     next();
 })
 /**

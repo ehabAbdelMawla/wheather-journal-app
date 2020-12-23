@@ -13,7 +13,7 @@ const PORT = 8080;
 const server = `http://localhost:${PORT}`
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
 
 
@@ -25,7 +25,7 @@ const getWheatherResponse = async () => {
         }
         const res = await fetch
             (
-                `https://community-open-weather-map.p.rapidapi.com/weather?q=London%2Cuk&id=${zipInput.value}`,
+                `https://community-open-weather-map.p.rapidapi.com/weather?q=London%2Cuk&units=imperial&id=${zipInput.value}`,
                 {
                     "method": "GET",
                     "headers": {
@@ -62,8 +62,7 @@ const postWeatherRespone = async (linkToServer, postRequestBody) => {
         });
 
         if (req.status == 200) {
-            const data = await req.json();
-            updateUi(data)
+            updateUi();
         }
     }
     catch (error) {
@@ -72,10 +71,25 @@ const postWeatherRespone = async (linkToServer, postRequestBody) => {
 
 }
 
-const updateUi = (newData) => {
-    dateElement.innerHTML = `Date : ${newData.date}`;
-    tempElement.innerHTML = `Temperature : ${newData.temperature}`;
-    contentElement.innerHTML = `Content : ${newData.user_response}`;
+const updateUi = async () => {
+    const res = await fetch(`${server}/getData`, {
+        "method": "GET",
+        headers: {
+            "Accept": 'application/json',
+            'Content-Type': 'application/json',
+        }
+    });
+
+
+    if (res.status == 200) {
+        const nodeServerData = await res.json();
+        dateElement.innerHTML = `Date : ${nodeServerData.date}`;
+        tempElement.innerHTML = `Temperature : ${nodeServerData.temperature}`;
+        contentElement.innerHTML = `Content : ${nodeServerData.user_response}`;
+    }
+
+
+
 }
 
 
