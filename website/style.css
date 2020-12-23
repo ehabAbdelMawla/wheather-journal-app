@@ -7,20 +7,23 @@
 
 
 #app{
-    display: grid;
-    grid-auto-rows: minmax(5px, auto);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    /* grid-auto-rows: minmax(auto, auto); */
     /* grid-template-columns:  */
     min-height:100vh;
     background: #222;
     color: whitesmoke;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
 
 .holder{
     margin: 10px 10px 50px;
-    padding: 25px;
+ 
 }
 .holder.headline{
     padding: 10px;
@@ -37,6 +40,8 @@
 
 .entry{
     background: rgba(59, 74, 107, .4);
+    min-width: 50vw;
+    min-height: 20vh;
 }
 
 #entryHolder{
@@ -80,14 +85,15 @@ input{
 }
 
 button{
-    width: 400px;
-    height: 100px;
+    width: 200px;
+    height: 80px;
     background: #3b4a6b;
     color: whitesmoke;
     font-size: 26px;
     font-family: 'Oswald', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
+
 }
 h1{
     font-size: 36px;

@@ -8,7 +8,7 @@ const tempElement = document.getElementById("temp");
 const contentElement = document.getElementById("content");
 
 // Requestes Variables
-const wheatherApiKey = "f9f7fc8f9amshf3a2c34dd037befp1d2a25jsnaf2cbf3b9888";
+const wheatherApiKey = "add your own key";
 const PORT = 8080;
 const server = `http://localhost:${PORT}`
 // Create a new date instance dynamically with JS
@@ -19,6 +19,10 @@ let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
 
 const getWheatherResponse = async () => {
     try {
+        if (zipInput.value === "") {
+            alert("No ZipCode provided");
+            return
+        }
         const res = await fetch
             (
                 `https://community-open-weather-map.p.rapidapi.com/weather?q=London%2Cuk&id=${zipInput.value}`,
