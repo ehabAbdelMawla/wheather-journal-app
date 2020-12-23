@@ -8,7 +8,7 @@ const tempElement = document.getElementById("temp");
 const contentElement = document.getElementById("content");
 
 // Requestes Variables
-const wheatherApiKey = "add your own key";
+const wheatherApiKey = "f9f7fc8f9amshf3a2c34dd037befp1d2a25jsnaf2cbf3b9888";
 const PORT = 8080;
 const server = `http://localhost:${PORT}`
 // Create a new date instance dynamically with JS
@@ -34,12 +34,15 @@ const getWheatherResponse = async () => {
                     }
                 }
             );
-        const body = await res.json();
-        postWeatherRespone(server, {
-            temperature: body.main.temp,
-            date: newDate,
-            user_response: feelingsTextArea.value
-        });
+        if (res.status == 200) {
+            const body = await res.json();
+            postWeatherRespone(server, {
+                temperature: body.main.temp,
+                date: newDate,
+                user_response: feelingsTextArea.value
+            });
+        }
+
     }
     catch (error) {
         console.log('An Error Occure ', error);
